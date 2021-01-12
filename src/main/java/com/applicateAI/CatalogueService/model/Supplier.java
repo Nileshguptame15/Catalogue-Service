@@ -1,18 +1,35 @@
 package com.applicateAI.CatalogueService.model;
 
-public class Supplier {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	private static int count;
+@Entity
+@Table(name = "Supplier")
+public class Supplier {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "supplier_Id")
 	private int supplierId;
+	@Column(name = "supplier_Name")
 	private String supplierName;
 	
+	public Supplier() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Supplier(String supplierName) {
 		super();
-		this.supplierId = count++;
 		this.supplierName = supplierName;
 	}
 	public int getSupplierId() {
 		return supplierId;
+	}
+	public void setSupplierId(int supplierId) {
+		this.supplierId=supplierId;
 	}
 	public String getSupplierName() {
 		return supplierName;

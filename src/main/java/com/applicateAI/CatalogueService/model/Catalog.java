@@ -1,12 +1,28 @@
 package com.applicateAI.CatalogueService.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "catalog")
 public class Catalog {
-	private static int count;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="sku_code")
 	private int skuCode;
+	@Column(name="sku_Name")
 	private String skuName;
+	@Column(name="sku_Description")
 	private String skuDescription;
+	@Column(name="brand_Name")
 	private String brandName;
+	@Column(name="brand_Description")
 	private String brandDescription;
+	@Column(name="supplier_Id")
 	private int supplierId;
 	
 	public Catalog() {
@@ -17,14 +33,15 @@ public class Catalog {
 	public Catalog(String skuName, String skuDescription, String brandName, String brandDescription,
 			int supplierId) {
 		super();
-		this.skuCode = count++;
 		this.skuName = skuName;
 		this.skuDescription = skuDescription;
 		this.brandName = brandName;
 		this.brandDescription = brandDescription;
 		this.supplierId = supplierId;
 	}
-	
+	public void setSkuCode(int skuCode) {
+		this.skuCode= skuCode;
+	}
 	public int getSkuCode() {
 		return skuCode;
 	}
