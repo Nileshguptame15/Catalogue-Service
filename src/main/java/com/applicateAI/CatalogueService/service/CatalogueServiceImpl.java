@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.applicateAI.CatalogueService.dao.CatalogRepository;
 import com.applicateAI.CatalogueService.dao.SupplierRepository;
 import com.applicateAI.CatalogueService.model.Catalog;
@@ -21,29 +20,12 @@ public class CatalogueServiceImpl implements CatalogueService {
 	SupplierRepository supplierRepository;
 
 	@Override
-	public List<String> searchItems(String supplierName, String serachItem) {
-		List<Catalog> result = new ArrayList();
-		int supplierId = -1;
-		/*
-		 * Looking for supplier Id for foreign key in Catalog if not found by default
-		 * value is -1
-		 */
-		List<Supplier> supplierList = (List<Supplier>) supplierRepository.findAll();
-		for (Supplier supplier : supplierList) {
-			if (supplier.getSupplierName().equalsIgnoreCase(supplierName)) {
-				supplierId = supplier.getSupplierId();
-				break;
-			}
-		}
-		System.out.println(supplierId);
-		/*
-		 * Adding Catalog into list by search Results
-		 */
+	public List<String> searchItems(String serachItem) {
+		List<Catalog> result = new ArrayList<Catalog>();
 		List<Catalog> catalogueList = (List<Catalog>) catalogRepository.findAll();
 		for (Catalog catalog : catalogueList) {
 			System.out.println(catalog.getSkuName());
-			if (catalog.getSupplierId() == supplierId
-					&& catalog.getSkuName().toLowerCase().contains(serachItem.toLowerCase())) {
+			if (catalog.getSkuName().toLowerCase().contains(serachItem.toLowerCase())) {
 				result.add(catalog);
 			}
 		}
